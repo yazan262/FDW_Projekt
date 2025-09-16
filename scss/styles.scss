@@ -1,6 +1,18 @@
-/* styles.scss */
-@use "_colors" as *;
-@use "_fonts" as *;
-@use "_layout" as *;
-@use "_foundation" as *;
-@use "_mixins" as mixins; 
+/* styles.scss
+ * Zentrale Einstiegsdatei für das Projekt.
+ * Architektur angelehnt an SMACSS/ITCSS:
+ * - _colors: Farbsystem (Variablen)
+ * - _fonts: Typografie + automatische Heading-Skala
+ * - _layout: Grid- und Flex-Utilities
+ * - _foundation: Basiselemente, Komponenten, Utilities
+ * - _animations: Keyframes + Motion-Preferences
+ * - _mixins: Wiederverwendbare Mixins & Generatoren
+ */
+
+ @use "_colors" as *;
+ @use "_fonts" as *;
+ @use "_layout" as *;
+ @use "_foundation" as *;
+ @use "_animations" as *;
+ @use "_mixins" as mixins;
+ 

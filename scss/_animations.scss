@@ -1,0 +1,48 @@
+/* _animations.scss */
+
+/* Variablen für Schatten- und Glow-Effekte */
+:root {
+  --btn-elevate-shadow: rgba(0, 0, 0, 0.18);
+  --btn-glow: rgba(52, 152, 219, 0.18); /* Primärfarbe als dezenter Glow */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Dark Mode: stärkerer Glow, dunklerer Schatten */
+    --btn-elevate-shadow: rgba(0, 0, 0, 0.6);
+    --btn-glow: color-mix(in srgb, #3498db 45%, rgba(255, 255, 255, 0));
+  }
+}
+
+@layer components {
+  @keyframes btn-breathe {
+    0%,
+    100% {
+      transform: translateY(0) scale(1);
+      /* kleiner Grundschatten, kein sichtbarer Glow */
+      box-shadow: 0 0 0 0 var(--btn-glow), 0 2px 6px var(--btn-elevate-shadow);
+    }
+    50% {
+      transform: translateY(-3px) scale(1.02);
+      /* deutlicher Glow-Ring + stärkerer Schatten */
+      box-shadow: 0 0 0 8px var(--btn-glow),
+        0 12px 24px var(--btn-elevate-shadow);
+    }
+  }
+
+  /* Hover-Animation für Buttons und Formular-Inputs */
+  button:hover,
+  input[type="submit"]:hover,
+  input[type="reset"]:hover {
+    animation: btn-breathe 900ms ease;
+    will-change: transform, box-shadow; /* Performance-Hinweis */
+  }
+}
+
+/* Bewegungen vollständig deaktivieren, falls vom Nutzer gewünscht */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

@@ -1,4 +1,5 @@
 /* _layout.scss */
+/* Enthält Layout-Helfer für Container, Grid- und Flexbox-Systeme. */
 @use "./_colors" as *;
 @use "./_fonts" as *;
 
@@ -6,7 +7,7 @@ $max-width: 1200px;
 $border-radius: 4px;
 
 @layer layout {
-  /* Container für zentrierten Inhalt */
+  /* Zentrierter Inhalts-Container mit maximaler Breite */
   .container {
     width: 100%;
     max-width: $max-width;
@@ -14,13 +15,13 @@ $border-radius: 4px;
     padding: 0 $spacing-md;
   }
 
-  /* Grid-Layout-System */
+  /* Basisklasse für Grid-Layouts mit flexiblem Spacing */
   .grid {
     display: grid;
     gap: $spacing-md;
   }
 
-  /* Vordefinierte Grid-Spalten für häufige Layouts */
+  /* Vordefinierte Grid-Varianten für häufige Spaltenaufteilungen */
   .grid-2 {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -31,12 +32,12 @@ $border-radius: 4px;
     grid-template-columns: repeat(4, 1fr);
   }
 
-  /* Flexbox-Layout-System */
+  /* Flexbox-Basislayout */
   .flex {
     display: flex;
   }
 
-  /* Flexbox-Ausrichtungsoptionen */
+  /* Utility-Klassen für gängige Flex-Ausrichtungen */
   .flex-col {
     flex-direction: column;
   }

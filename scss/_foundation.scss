@@ -2,9 +2,10 @@
 @use "./_colors" as *;
 @use "./_fonts" as *;
 @use "./_layout" as *;
+@use "./_mixins" as mixins;
 
 /* ==========================================================================
-   RESET & BASE STYLES
+   RESET & BASE
    ========================================================================== */
 
 @layer reset {
@@ -17,7 +18,7 @@
   }
 }
 
-/* Base HTML Elements */
+/* Basiselemente */
 html {
   font-size: $font-size-base;
   scroll-behavior: smooth;
@@ -28,12 +29,12 @@ body {
   line-height: $line-height;
   color: $color-text;
   background-color: $color-background;
-  max-width: 1200px; /* maximale Breite für den Inhalt */
-  margin: 0 auto; /* zentriert den Inhalt horizontal */
+  max-width: 1200px; /* Seitenbreite begrenzen */
+  margin: 0 auto; /* Inhalt zentrieren */
   padding: 0 $spacing-md;
 }
 
-/* Responsive Media */
+/* Medien responsiv einpassen */
 img,
 picture,
 svg,
@@ -66,10 +67,10 @@ video {
     }
   }
 
-  /* Responsive Verhalten für kleine Screens */
+  /* Mobile Darstellung: Tabellen in Kartenform umbrechen */
   @media (max-width: 30em) {
     table thead {
-      display: none; /* Kopfzeile ausblenden */
+      display: none;
     }
 
     table tr {
@@ -102,17 +103,15 @@ video {
    ========================================================================== */
 
 @layer components {
-  /* Form Elements */
+  /* Formularelemente */
   fieldset {
     padding: $spacing-md;
   }
-
   label {
     display: block;
     margin-bottom: $spacing-xs;
   }
 
-  /* Radio and Checkbox Groups */
   .radio-group,
   .checkbox-group {
     display: flex;
@@ -141,25 +140,31 @@ video {
     margin-bottom: $spacing-md;
     border: 1px solid $color-border;
     border-radius: $border-radius;
-    font-family: inherit;
-    font-size: inherit;
+    font: inherit;
   }
 
   /* Buttons */
   button {
-    padding: $spacing-sm $spacing-md;
-    background-color: $color-primary;
-    color: white;
-    border: none;
-    border-radius: $border-radius;
-    cursor: pointer;
+    @include mixins.base-btn(
+      $bg: $color-primary,
+      $hover: color-mix(in srgb, $color-primary 80%, black)
+    );
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
   }
 
-  button:hover {
-    background-color: color-mix(in srgb, $color-primary 80%, black);
+  input[type="submit"],
+  input[type="reset"] {
+    @include mixins.base-btn(
+      $bg: $color-primary,
+      $hover: color-mix(in srgb, $color-primary 80%, black)
+    );
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    appearance: button; /* einheitliches Rendering */
   }
 
-  /* Cards */
+  /* Cards: werden per JS beim Scrollen weich eingeblendet */
   .card {
     background-color: $color-background;
     border: 1px solid $color-border;
@@ -167,18 +172,17 @@ video {
     padding: $spacing-md;
     margin-bottom: $spacing-md;
 
-    /* Fade-In Animation */
     opacity: 0;
     transform: translateY(2rem);
     transition: opacity 0.8s ease, transform 0.8s ease;
   }
 
-  /* Sichtbar, sobald JS-Klasse hinzugefügt wird */
   .card.visible {
     opacity: 1;
     transform: translateY(0);
   }
 
+  /* Container Queries vorbereiten */
   main.container {
     container-type: inline-size;
   }
@@ -212,9 +216,7 @@ video {
 
 @layer navigation {
   nav ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: $spacing-md;
+    @include mixins.flex-box($main: space-between, $gap: $spacing-md);
     padding: $spacing-md 0;
   }
 
@@ -229,7 +231,7 @@ video {
     padding: $spacing-sm $spacing-md;
     text-decoration: none;
     color: $color-primary;
-    transition: color 0.3s ease; /* smooth color */
+    transition: color 0.3s ease;
   }
 
   nav a::after {
@@ -240,15 +242,14 @@ video {
     width: 0;
     height: 2px;
     background: $color-primary;
-    transition: width 0.3s ease; /* smooth underline */
+    transition: width 0.3s ease;
   }
 
   nav a:hover {
     color: color-mix(in srgb, $color-primary 80%, black);
   }
-
   nav a:hover::after {
-    width: 100%; /* animierte Linie fährt rein */
+    width: 100%;
   }
 }
 
@@ -257,203 +258,68 @@ video {
    ========================================================================== */
 
 @layer utilities {
-  /* Gap Utilities */
-  .gap-xs {
-    gap: $spacing-xs;
-  }
-  .gap-sm {
-    gap: $spacing-sm;
-  }
-  .gap-md {
-    gap: $spacing-md;
-  }
-  .gap-lg {
-    gap: $spacing-lg;
-  }
-  .gap-xl {
-    gap: $spacing-xl;
-  }
-
-  /* Margin Utilities */
-  .m-0 {
-    margin: 0;
-  }
-  .mt-0 {
-    margin-top: 0;
-  }
-  .mb-0 {
-    margin-bottom: 0;
-  }
-  .ml-0 {
-    margin-left: 0;
-  }
-  .mr-0 {
-    margin-right: 0;
-  }
-
-  .m-sm {
-    margin: $spacing-sm;
-  }
-  .mt-sm {
-    margin-top: $spacing-sm;
-  }
-  .mb-sm {
-    margin-bottom: $spacing-sm;
-  }
-  .ml-sm {
-    margin-left: $spacing-sm;
-  }
-  .mr-sm {
-    margin-right: $spacing-sm;
-  }
-
-  .m-md {
-    margin: $spacing-md;
-  }
-  .mt-md {
-    margin-top: $spacing-md;
-  }
-  .mb-md {
-    margin-bottom: $spacing-md;
-  }
-  .ml-md {
-    margin-left: $spacing-md;
-  }
-  .mr-md {
-    margin-right: $spacing-md;
-  }
-
-  /* Padding Utilities */
-  .p-0 {
-    padding: 0;
-  }
-  .pt-0 {
-    padding-top: 0;
-  }
-  .pb-0 {
-    padding-bottom: 0;
-  }
-  .pl-0 {
-    padding-left: 0;
-  }
-  .pr-0 {
-    padding-right: 0;
-  }
-
-  .p-sm {
-    padding: $spacing-sm;
-  }
-  .pt-sm {
-    padding-top: $spacing-sm;
-  }
-  .pb-sm {
-    padding-bottom: $spacing-sm;
-  }
-  .pl-sm {
-    padding-left: $spacing-sm;
-  }
-  .pr-sm {
-    padding-right: $spacing-sm;
-  }
-
-  .p-md {
-    padding: $spacing-md;
-  }
-  .pt-md {
-    padding-top: $spacing-md;
-  }
-  .pb-md {
-    padding-bottom: $spacing-md;
-  }
-  .pl-md {
-    padding-left: $spacing-md;
-  }
-  .pr-md {
-    padding-right: $spacing-md;
-  }
-
-  /* Structural Pseudo-classes */
-  .first-child-mt-0 > *:first-child {
-    margin-top: 0;
-  }
-
-  .last-child-mb-0 > *:last-child {
-    margin-bottom: 0;
-  }
-
-  /* Form Feedback Utilities */
+  /* Screenreader-only */
   .visually-hidden {
-    position: absolute;
-    inline-size: 1px;
-    block-size: 1px;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    white-space: nowrap;
+    @include mixins.sr-only;
   }
 
+  /* Formular-Feedback */
   .form-msg {
     margin-block-start: 0.25rem;
     font-size: 0.95em;
   }
-
   .form-msg--error {
     color: #b00020;
   }
-
   .form-msg--ok {
     color: #1b5e20;
   }
-
   .is-invalid {
     border-color: #b00020;
   }
-
   .is-valid {
     border-color: #1b5e20;
   }
+
+  /* Spacing-Utilities automatisch generieren */
+  @include mixins.generate-spacing-utilities;
 }
 
 /* ==========================================================================
-   RESPONSIVE DESIGN
+   RESPONSIVE
    ========================================================================== */
 
 @layer responsive {
   @media (max-width: 768px) {
-    /* Typography for Mobile */
+    /* kompaktere Typografie auf kleinen Viewports */
     h1 {
-      font-size: 1rem; /* viel kleiner für mobile Geräte */
+      font-size: 1rem;
       line-height: 1.2;
-      word-wrap: break-word;
       overflow-wrap: break-word;
-      hyphens: auto; /* automatische Silbentrennung */
+      hyphens: auto;
       margin-bottom: $spacing-sm;
     }
-
     h2 {
-      font-size: 0.875rem; /* sehr klein für mobile Geräte */
+      font-size: 0.875rem;
       line-height: 1.3;
-      word-wrap: break-word;
       overflow-wrap: break-word;
-      hyphens: auto; /* automatische Silbentrennung */
+      hyphens: auto;
       margin-bottom: $spacing-sm;
     }
-
-    /* Spezielle Behandlung für sehr lange Wörter */
     h1,
     h2 {
       max-width: 100%;
-      overflow-wrap: anywhere; /* bricht auch sehr lange Wörter */
-      word-break: break-word; /* zusätzliche Worttrennung */
+      word-break: break-word;
     }
 
-    /* Grid Layouts for Mobile */
+    /* Grids einkolumnig */
     .grid-2,
     .grid-3,
     .grid-4 {
       grid-template-columns: 1fr;
     }
 
-    /* Navigation for Mobile */
+    /* Navigation stapeln */
     nav ul {
       flex-direction: column;
       gap: $spacing-sm;
@@ -481,21 +347,20 @@ video {
 }
 
 /* ==========================================================================
-   COLOR SCHEMES (LIGHT & DARK MODE)
+   COLOR SCHEMES
    ========================================================================== */
 
-/* Light Mode (Default) */
+/* Light Default, Dark unterstützt */
 :root {
   color-scheme: light dark;
 }
 
-/* Dark Mode */
 @media (prefers-color-scheme: dark) {
   :root {
     color-scheme: dark;
   }
 
-  /* Base Colors */
+  /* Grundfarben */
   body {
     background: #0f1115;
     color: #e7e9ee;
@@ -509,7 +374,7 @@ video {
     color: color-mix(in srgb, $color-primary 85%, white);
   }
 
-  /* Navigation im Dark Mode */
+  /* Navigation */
   nav a {
     color: color-mix(in srgb, $color-primary 75%, white);
   }
@@ -529,28 +394,28 @@ video {
     border-color: #2a2f3a;
   }
 
-  /* Tables */
+  /* Tabellen */
   table {
     background: #151821;
     border-color: #2a2f3a;
   }
   table th {
-    background-color: #1a1f2a !important; /* dunklerer Hintergrund für Header im Dark Mode */
+    background-color: #1a1f2a !important;
     border-color: #2a2f3a !important;
-    color: #e7e9ee !important; /* Textfarbe für bessere Lesbarkeit */
+    color: #e7e9ee !important;
   }
   table td {
     border-color: #2a2f3a;
   }
 
-  /* Responsive Tables in Dark Mode */
+  /* Tabelle mobil absetzen */
   @media (max-width: 30em) {
     table tr:nth-of-type(odd) {
-      background: #1a1f2a; /* dunkleres Grau für Dark Mode */
+      background: #1a1f2a;
     }
   }
 
-  /* Forms */
+  /* Formulare */
   input,
   select,
   textarea {
@@ -559,32 +424,27 @@ video {
     border-color: #2a2f3a;
   }
 
-  /* Messages */
+  /* Meldungen */
   .hint {
     color: #b6c2d9;
   }
   .form-msg {
     color: #ffb4a9;
   }
-
-  /* Form Feedback in Dark Mode */
   .form-msg--error {
-    color: #ff6b6b; /* helleres Rot für Dark Mode */
+    color: #ff6b6b;
   }
-
   .form-msg--ok {
-    color: #51cf66; /* helleres Grün für Dark Mode */
+    color: #51cf66;
   }
-
   .is-invalid {
     border-color: #ff6b6b;
   }
-
   .is-valid {
     border-color: #51cf66;
   }
 
-  /* Focus */
+  /* Fokus sichtbar halten */
   :focus-visible {
     outline: 2px solid color-mix(in srgb, $color-primary 70%, white);
     outline-offset: 2px;

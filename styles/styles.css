@@ -1,17 +1,45 @@
 @charset "UTF-8";
-/* styles.scss */
+/* styles.scss
+ * Zentrale Einstiegsdatei für das Projekt.
+ * Architektur angelehnt an SMACSS/ITCSS:
+ * - _colors: Farbsystem (Variablen)
+ * - _fonts: Typografie + automatische Heading-Skala
+ * - _layout: Grid- und Flex-Utilities
+ * - _foundation: Basiselemente, Komponenten, Utilities
+ * - _animations: Keyframes + Motion-Preferences
+ * - _mixins: Wiederverwendbare Mixins & Generatoren
+ */
 /* _colors.scss */
-/* styles.scss */
+/* styles.scss
+ * Zentrale Einstiegsdatei für das Projekt.
+ * Architektur angelehnt an SMACSS/ITCSS:
+ * - _colors: Farbsystem (Variablen)
+ * - _fonts: Typografie + automatische Heading-Skala
+ * - _layout: Grid- und Flex-Utilities
+ * - _foundation: Basiselemente, Komponenten, Utilities
+ * - _animations: Keyframes + Motion-Preferences
+ * - _mixins: Wiederverwendbare Mixins & Generatoren
+ */
 /* _fonts.scss */
-/* _mixins.scss | eigene Mixins & Generatoren */
+/* _mixins.scss — Mixins & Generatoren
+   Enthält Fokus-/A11y-Helfer, Layout-Mixins, Button-Basis
+   sowie Typo- und Utility-Generatoren. */
 /* ---------- Basics ---------- */
-/* Uppercase + Bold (ähnlich Prof) */
-/* Flex/Grid Helfer */
-/* Buttons (Basis) */
-/* ---------- Typo-Automat (Kontrollstruktur) ---------- */
-/* erzeugt h1…h6 fallende Größen ab Basis */
-/* ---------- Utility-Generatoren (Kontrollstrukturen) ---------- */
-/* Automatische Hierarchie: größtes H1 fällt bis H6 ab */
+/* Sichtbarer, konsistenter Fokusrahmen */
+/* Screenreader-only (visuell ausgeblendet, zugänglich für SR) */
+/* Großgeschriebener, betonter Text (z. B. für Sektionen/Labels) */
+/* ---------- Layout-Helfer ---------- */
+/* Flexbox-Schnellstart mit konfigurierbaren Achsen/Gaps */
+/* Kind mittig ausrichten (Grid-basierte Zentrierung) */
+/* ---------- Buttons ---------- */
+/* Basis-Button (Hintergrund, Hover, Fokusring) */
+/* ---------- Typografie ---------- */
+/* Generiert h1–h6 mit abnehmenden Größen ab einem Maximum */
+/* ---------- Utility-Generatoren ---------- */
+/* Spacing-Skala für Utility-Klassen */
+/* Erzeugt gap-/margin-/padding-Utilities in allen Größen aus $space */
+/* Abstände */
+/* Basis-Typografie */
 :root {
   font-size: 16px;
   line-height: 1.5;
@@ -21,7 +49,7 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* ersetzt die manuellen h1…h6 Blöcke */
+/* Automatische Hierarchie: H1 → H6 mit abnehmenden Größen */
 h1 {
   font-size: 2.5rem;
   line-height: 1.2;
@@ -62,6 +90,7 @@ p {
   margin-bottom: 1rem;
 }
 
+/* Links */
 a {
   color: #3498db;
   text-decoration: none;
@@ -71,7 +100,7 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Listen-Styles */
+/* Listen */
 ul,
 ol {
   margin-bottom: 1rem;
@@ -86,22 +115,32 @@ ol {
   list-style-type: decimal;
 }
 
-/* styles.scss */
+/* styles.scss
+ * Zentrale Einstiegsdatei für das Projekt.
+ * Architektur angelehnt an SMACSS/ITCSS:
+ * - _colors: Farbsystem (Variablen)
+ * - _fonts: Typografie + automatische Heading-Skala
+ * - _layout: Grid- und Flex-Utilities
+ * - _foundation: Basiselemente, Komponenten, Utilities
+ * - _animations: Keyframes + Motion-Preferences
+ * - _mixins: Wiederverwendbare Mixins & Generatoren
+ */
 /* _layout.scss */
+/* Enthält Layout-Helfer für Container, Grid- und Flexbox-Systeme. */
 @layer layout {
-  /* Container für zentrierten Inhalt */
+  /* Zentrierter Inhalts-Container mit maximaler Breite */
   .container {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 1rem;
   }
-  /* Grid-Layout-System */
+  /* Basisklasse für Grid-Layouts mit flexiblem Spacing */
   .grid {
     display: grid;
     gap: 1rem;
   }
-  /* Vordefinierte Grid-Spalten für häufige Layouts */
+  /* Vordefinierte Grid-Varianten für häufige Spaltenaufteilungen */
   .grid-2 {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -111,11 +150,11 @@ ol {
   .grid-4 {
     grid-template-columns: repeat(4, 1fr);
   }
-  /* Flexbox-Layout-System */
+  /* Flexbox-Basislayout */
   .flex {
     display: flex;
   }
-  /* Flexbox-Ausrichtungsoptionen */
+  /* Utility-Klassen für gängige Flex-Ausrichtungen */
   .flex-col {
     flex-direction: column;
   }
@@ -132,10 +171,20 @@ ol {
     align-items: center;
   }
 }
-/* styles.scss */
+/* styles.scss
+ * Zentrale Einstiegsdatei für das Projekt.
+ * Architektur angelehnt an SMACSS/ITCSS:
+ * - _colors: Farbsystem (Variablen)
+ * - _fonts: Typografie + automatische Heading-Skala
+ * - _layout: Grid- und Flex-Utilities
+ * - _foundation: Basiselemente, Komponenten, Utilities
+ * - _animations: Keyframes + Motion-Preferences
+ * - _mixins: Wiederverwendbare Mixins & Generatoren
+ */
+/* _fonts.scss */
 /* _foundation.scss */
 /* ==========================================================================
-   RESET & BASE STYLES
+   RESET & BASE
    ========================================================================== */
 @layer reset {
   *,
@@ -146,7 +195,7 @@ ol {
     padding: 0;
   }
 }
-/* Base HTML Elements */
+/* Basiselemente */
 html {
   font-size: 16px;
   scroll-behavior: smooth;
@@ -157,12 +206,12 @@ body {
   line-height: 1.5;
   color: #333;
   background-color: #fff;
-  max-width: 1200px; /* maximale Breite für den Inhalt */
-  margin: 0 auto; /* zentriert den Inhalt horizontal */
+  max-width: 1200px; /* Seitenbreite begrenzen */
+  margin: 0 auto; /* Inhalt zentrieren */
   padding: 0 1rem;
 }
 
-/* Responsive Media */
+/* Medien responsiv einpassen */
 img,
 picture,
 svg,
@@ -191,10 +240,10 @@ video {
     background-color: #f5f5f5;
     font-weight: bold;
   }
-  /* Responsive Verhalten für kleine Screens */
+  /* Mobile Darstellung: Tabellen in Kartenform umbrechen */
   @media (max-width: 30em) {
     table thead {
-      display: none; /* Kopfzeile ausblenden */
+      display: none;
     }
     table tr {
       display: block;
@@ -221,7 +270,7 @@ video {
    COMPONENTS
    ========================================================================== */
 @layer components {
-  /* Form Elements */
+  /* Formularelemente */
   fieldset {
     padding: 1rem;
   }
@@ -229,7 +278,6 @@ video {
     display: block;
     margin-bottom: 0.25rem;
   }
-  /* Radio and Checkbox Groups */
   .radio-group,
   .checkbox-group {
     display: flex;
@@ -255,38 +303,65 @@ video {
     margin-bottom: 1rem;
     border: 1px solid #ddd;
     border-radius: 4px;
-    font-family: inherit;
-    font-size: inherit;
+    font: inherit;
   }
   /* Buttons */
   button {
-    padding: 0.5rem 1rem;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 4px;
     cursor: pointer;
+    height: auto;
+    font-weight: 600;
+    border: 1px solid transparent;
+    background: #3498db;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
   }
   button:hover {
-    background-color: color-mix(in srgb, #3498db 80%, black);
+    background: color-mix(in srgb, #3498db 80%, black);
   }
-  /* Cards */
+  button:focus-visible {
+    outline: 2px solid hsl(210, 40%, 30%);
+    outline-offset: 2px;
+  }
+  input[type=submit],
+  input[type=reset] {
+    cursor: pointer;
+    height: auto;
+    font-weight: 600;
+    border: 1px solid transparent;
+    background: #3498db;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    -webkit-appearance: button;
+       -moz-appearance: button;
+            appearance: button; /* einheitliches Rendering */
+  }
+  input[type=submit]:hover,
+  input[type=reset]:hover {
+    background: color-mix(in srgb, #3498db 80%, black);
+  }
+  input[type=submit]:focus-visible,
+  input[type=reset]:focus-visible {
+    outline: 2px solid hsl(210, 40%, 30%);
+    outline-offset: 2px;
+  }
+  /* Cards: werden per JS beim Scrollen weich eingeblendet */
   .card {
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 4px;
     padding: 1rem;
     margin-bottom: 1rem;
-    /* Fade-In Animation */
     opacity: 0;
     transform: translateY(2rem);
     transition: opacity 0.8s ease, transform 0.8s ease;
   }
-  /* Sichtbar, sobald JS-Klasse hinzugefügt wird */
   .card.visible {
     opacity: 1;
     transform: translateY(0);
   }
+  /* Container Queries vorbereiten */
   main.container {
     container-type: inline-size;
   }
@@ -318,7 +393,9 @@ video {
 @layer navigation {
   nav ul {
     display: flex;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
     gap: 1rem;
     padding: 1rem 0;
   }
@@ -332,7 +409,7 @@ video {
     padding: 0.5rem 1rem;
     text-decoration: none;
     color: #3498db;
-    transition: color 0.3s ease; /* smooth color */
+    transition: color 0.3s ease;
   }
   nav a::after {
     content: "";
@@ -342,135 +419,20 @@ video {
     width: 0;
     height: 2px;
     background: #3498db;
-    transition: width 0.3s ease; /* smooth underline */
+    transition: width 0.3s ease;
   }
   nav a:hover {
     color: color-mix(in srgb, #3498db 80%, black);
   }
   nav a:hover::after {
-    width: 100%; /* animierte Linie fährt rein */
+    width: 100%;
   }
 }
 /* ==========================================================================
    UTILITIES
    ========================================================================== */
 @layer utilities {
-  /* Gap Utilities */
-  .gap-xs {
-    gap: 0.25rem;
-  }
-  .gap-sm {
-    gap: 0.5rem;
-  }
-  .gap-md {
-    gap: 1rem;
-  }
-  .gap-lg {
-    gap: 1.5rem;
-  }
-  .gap-xl {
-    gap: 2rem;
-  }
-  /* Margin Utilities */
-  .m-0 {
-    margin: 0;
-  }
-  .mt-0 {
-    margin-top: 0;
-  }
-  .mb-0 {
-    margin-bottom: 0;
-  }
-  .ml-0 {
-    margin-left: 0;
-  }
-  .mr-0 {
-    margin-right: 0;
-  }
-  .m-sm {
-    margin: 0.5rem;
-  }
-  .mt-sm {
-    margin-top: 0.5rem;
-  }
-  .mb-sm {
-    margin-bottom: 0.5rem;
-  }
-  .ml-sm {
-    margin-left: 0.5rem;
-  }
-  .mr-sm {
-    margin-right: 0.5rem;
-  }
-  .m-md {
-    margin: 1rem;
-  }
-  .mt-md {
-    margin-top: 1rem;
-  }
-  .mb-md {
-    margin-bottom: 1rem;
-  }
-  .ml-md {
-    margin-left: 1rem;
-  }
-  .mr-md {
-    margin-right: 1rem;
-  }
-  /* Padding Utilities */
-  .p-0 {
-    padding: 0;
-  }
-  .pt-0 {
-    padding-top: 0;
-  }
-  .pb-0 {
-    padding-bottom: 0;
-  }
-  .pl-0 {
-    padding-left: 0;
-  }
-  .pr-0 {
-    padding-right: 0;
-  }
-  .p-sm {
-    padding: 0.5rem;
-  }
-  .pt-sm {
-    padding-top: 0.5rem;
-  }
-  .pb-sm {
-    padding-bottom: 0.5rem;
-  }
-  .pl-sm {
-    padding-left: 0.5rem;
-  }
-  .pr-sm {
-    padding-right: 0.5rem;
-  }
-  .p-md {
-    padding: 1rem;
-  }
-  .pt-md {
-    padding-top: 1rem;
-  }
-  .pb-md {
-    padding-bottom: 1rem;
-  }
-  .pl-md {
-    padding-left: 1rem;
-  }
-  .pr-md {
-    padding-right: 1rem;
-  }
-  /* Structural Pseudo-classes */
-  .first-child-mt-0 > *:first-child {
-    margin-top: 0;
-  }
-  .last-child-mb-0 > *:last-child {
-    margin-bottom: 0;
-  }
-  /* Form Feedback Utilities */
+  /* Screenreader-only */
   .visually-hidden {
     position: absolute;
     inline-size: 1px;
@@ -479,6 +441,7 @@ video {
     clip: rect(0 0 0 0);
     white-space: nowrap;
   }
+  /* Formular-Feedback */
   .form-msg {
     margin-block-start: 0.25rem;
     font-size: 0.95em;
@@ -495,45 +458,207 @@ video {
   .is-valid {
     border-color: #1b5e20;
   }
+  /* Spacing-Utilities automatisch generieren */
+  .gap-xs {
+    gap: 0.25rem;
+  }
+  .m-xs {
+    margin: 0.25rem;
+  }
+  .mt-xs {
+    margin-top: 0.25rem;
+  }
+  .mb-xs {
+    margin-bottom: 0.25rem;
+  }
+  .ml-xs {
+    margin-left: 0.25rem;
+  }
+  .mr-xs {
+    margin-right: 0.25rem;
+  }
+  .p-xs {
+    padding: 0.25rem;
+  }
+  .pt-xs {
+    padding-top: 0.25rem;
+  }
+  .pb-xs {
+    padding-bottom: 0.25rem;
+  }
+  .pl-xs {
+    padding-left: 0.25rem;
+  }
+  .pr-xs {
+    padding-right: 0.25rem;
+  }
+  .gap-sm {
+    gap: 0.5rem;
+  }
+  .m-sm {
+    margin: 0.5rem;
+  }
+  .mt-sm {
+    margin-top: 0.5rem;
+  }
+  .mb-sm {
+    margin-bottom: 0.5rem;
+  }
+  .ml-sm {
+    margin-left: 0.5rem;
+  }
+  .mr-sm {
+    margin-right: 0.5rem;
+  }
+  .p-sm {
+    padding: 0.5rem;
+  }
+  .pt-sm {
+    padding-top: 0.5rem;
+  }
+  .pb-sm {
+    padding-bottom: 0.5rem;
+  }
+  .pl-sm {
+    padding-left: 0.5rem;
+  }
+  .pr-sm {
+    padding-right: 0.5rem;
+  }
+  .gap-md {
+    gap: 1rem;
+  }
+  .m-md {
+    margin: 1rem;
+  }
+  .mt-md {
+    margin-top: 1rem;
+  }
+  .mb-md {
+    margin-bottom: 1rem;
+  }
+  .ml-md {
+    margin-left: 1rem;
+  }
+  .mr-md {
+    margin-right: 1rem;
+  }
+  .p-md {
+    padding: 1rem;
+  }
+  .pt-md {
+    padding-top: 1rem;
+  }
+  .pb-md {
+    padding-bottom: 1rem;
+  }
+  .pl-md {
+    padding-left: 1rem;
+  }
+  .pr-md {
+    padding-right: 1rem;
+  }
+  .gap-lg {
+    gap: 1.5rem;
+  }
+  .m-lg {
+    margin: 1.5rem;
+  }
+  .mt-lg {
+    margin-top: 1.5rem;
+  }
+  .mb-lg {
+    margin-bottom: 1.5rem;
+  }
+  .ml-lg {
+    margin-left: 1.5rem;
+  }
+  .mr-lg {
+    margin-right: 1.5rem;
+  }
+  .p-lg {
+    padding: 1.5rem;
+  }
+  .pt-lg {
+    padding-top: 1.5rem;
+  }
+  .pb-lg {
+    padding-bottom: 1.5rem;
+  }
+  .pl-lg {
+    padding-left: 1.5rem;
+  }
+  .pr-lg {
+    padding-right: 1.5rem;
+  }
+  .gap-xl {
+    gap: 2rem;
+  }
+  .m-xl {
+    margin: 2rem;
+  }
+  .mt-xl {
+    margin-top: 2rem;
+  }
+  .mb-xl {
+    margin-bottom: 2rem;
+  }
+  .ml-xl {
+    margin-left: 2rem;
+  }
+  .mr-xl {
+    margin-right: 2rem;
+  }
+  .p-xl {
+    padding: 2rem;
+  }
+  .pt-xl {
+    padding-top: 2rem;
+  }
+  .pb-xl {
+    padding-bottom: 2rem;
+  }
+  .pl-xl {
+    padding-left: 2rem;
+  }
+  .pr-xl {
+    padding-right: 2rem;
+  }
 }
 /* ==========================================================================
-   RESPONSIVE DESIGN
+   RESPONSIVE
    ========================================================================== */
 @layer responsive {
   @media (max-width: 768px) {
-    /* Typography for Mobile */
+    /* kompaktere Typografie auf kleinen Viewports */
     h1 {
-      font-size: 1rem; /* viel kleiner für mobile Geräte */
+      font-size: 1rem;
       line-height: 1.2;
-      word-wrap: break-word;
       overflow-wrap: break-word;
       -webkit-hyphens: auto;
-              hyphens: auto; /* automatische Silbentrennung */
+              hyphens: auto;
       margin-bottom: 0.5rem;
     }
     h2 {
-      font-size: 0.875rem; /* sehr klein für mobile Geräte */
+      font-size: 0.875rem;
       line-height: 1.3;
-      word-wrap: break-word;
       overflow-wrap: break-word;
       -webkit-hyphens: auto;
-              hyphens: auto; /* automatische Silbentrennung */
+              hyphens: auto;
       margin-bottom: 0.5rem;
     }
-    /* Spezielle Behandlung für sehr lange Wörter */
     h1,
     h2 {
       max-width: 100%;
-      overflow-wrap: anywhere; /* bricht auch sehr lange Wörter */
-      word-break: break-word; /* zusätzliche Worttrennung */
+      word-break: break-word;
     }
-    /* Grid Layouts for Mobile */
+    /* Grids einkolumnig */
     .grid-2,
     .grid-3,
     .grid-4 {
       grid-template-columns: 1fr;
     }
-    /* Navigation for Mobile */
+    /* Navigation stapeln */
     nav ul {
       flex-direction: column;
       gap: 0.5rem;
@@ -558,19 +683,18 @@ video {
 }
 
 /* ==========================================================================
-   COLOR SCHEMES (LIGHT & DARK MODE)
+   COLOR SCHEMES
    ========================================================================== */
-/* Light Mode (Default) */
+/* Light Default, Dark unterstützt */
 :root {
   color-scheme: light dark;
 }
 
-/* Dark Mode */
 @media (prefers-color-scheme: dark) {
   :root {
     color-scheme: dark;
   }
-  /* Base Colors */
+  /* Grundfarben */
   body {
     background: #0f1115;
     color: #e7e9ee;
@@ -582,7 +706,7 @@ video {
   a:hover {
     color: color-mix(in srgb, #3498db 85%, white);
   }
-  /* Navigation im Dark Mode */
+  /* Navigation */
   nav a {
     color: color-mix(in srgb, #3498db 75%, white);
   }
@@ -600,28 +724,27 @@ video {
     background-color: #151821;
     border-color: #2a2f3a;
   }
-  /* Tables */
+  /* Tabellen */
   table {
     background: #151821;
     border-color: #2a2f3a;
   }
   table th {
-    background-color: #1a1f2a !important; /* dunklerer Hintergrund für Header im Dark Mode */
+    background-color: #1a1f2a !important;
     border-color: #2a2f3a !important;
-    color: #e7e9ee !important; /* Textfarbe für bessere Lesbarkeit */
+    color: #e7e9ee !important;
   }
   table td {
     border-color: #2a2f3a;
   }
-  /* Responsive Tables in Dark Mode */
-  /* Forms */
-  /* Messages */
-  /* Form Feedback in Dark Mode */
-  /* Focus */
+  /* Tabelle mobil absetzen */
+  /* Formulare */
+  /* Meldungen */
+  /* Fokus sichtbar halten */
 }
 @media (prefers-color-scheme: dark) and (max-width: 30em) {
   table tr:nth-of-type(odd) {
-    background: #1a1f2a; /* dunkleres Grau für Dark Mode */
+    background: #1a1f2a;
   }
 }
 @media (prefers-color-scheme: dark) {
@@ -639,10 +762,10 @@ video {
     color: #ffb4a9;
   }
   .form-msg--error {
-    color: #ff6b6b; /* helleres Rot für Dark Mode */
+    color: #ff6b6b;
   }
   .form-msg--ok {
-    color: #51cf66; /* helleres Grün für Dark Mode */
+    color: #51cf66;
   }
   .is-invalid {
     border-color: #ff6b6b;
@@ -653,6 +776,48 @@ video {
   :focus-visible {
     outline: 2px solid color-mix(in srgb, #3498db 70%, white);
     outline-offset: 2px;
+  }
+}
+/* _animations.scss */
+/* Variablen für Schatten- und Glow-Effekte */
+:root {
+  --btn-elevate-shadow: rgba(0, 0, 0, 0.18);
+  --btn-glow: rgba(52, 152, 219, 0.18); /* Primärfarbe als dezenter Glow */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Dark Mode: stärkerer Glow, dunklerer Schatten */
+    --btn-elevate-shadow: rgba(0, 0, 0, 0.6);
+    --btn-glow: color-mix(in srgb, #3498db 45%, rgba(255, 255, 255, 0));
+  }
+}
+@layer components {
+  @keyframes btn-breathe {
+    0%, 100% {
+      transform: translateY(0) scale(1);
+      /* kleiner Grundschatten, kein sichtbarer Glow */
+      box-shadow: 0 0 0 0 var(--btn-glow), 0 2px 6px var(--btn-elevate-shadow);
+    }
+    50% {
+      transform: translateY(-3px) scale(1.02);
+      /* deutlicher Glow-Ring + stärkerer Schatten */
+      box-shadow: 0 0 0 8px var(--btn-glow), 0 12px 24px var(--btn-elevate-shadow);
+    }
+  }
+  /* Hover-Animation für Buttons und Formular-Inputs */
+  button:hover,
+  input[type=submit]:hover,
+  input[type=reset]:hover {
+    animation: btn-breathe 900ms ease;
+    will-change: transform, box-shadow; /* Performance-Hinweis */
+  }
+}
+/* Bewegungen vollständig deaktivieren, falls vom Nutzer gewünscht */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
   }
 }
 /* _fonts.scss *//*# sourceMappingURL=styles.css.map */

@@ -1,11 +1,16 @@
-/* _mixins.scss | eigene Mixins & Generatoren */
+/* _mixins.scss — Mixins & Generatoren
+   Enthält Fokus-/A11y-Helfer, Layout-Mixins, Button-Basis
+   sowie Typo- und Utility-Generatoren. */
 
 /* ---------- Basics ---------- */
+
+/* Sichtbarer, konsistenter Fokusrahmen */
 @mixin focus-ring($color, $width: 2px) {
   outline: $width solid $color;
   outline-offset: 2px;
 }
 
+/* Screenreader-only (visuell ausgeblendet, zugänglich für SR) */
 @mixin sr-only {
   position: absolute;
   inline-size: 1px;
@@ -15,7 +20,7 @@
   white-space: nowrap;
 }
 
-/* Uppercase + Bold (ähnlich Prof) */
+/* Großgeschriebener, betonter Text (z. B. für Sektionen/Labels) */
 @mixin uppercase-bold-text(
   $color: currentColor,
   $font-weight: 700,
@@ -27,7 +32,9 @@
   letter-spacing: $letter-spacing;
 }
 
-/* Flex/Grid Helfer */
+/* ---------- Layout-Helfer ---------- */
+
+/* Flexbox-Schnellstart mit konfigurierbaren Achsen/Gaps */
 @mixin flex-box(
   $flow: row,
   $wrap: wrap,
@@ -42,12 +49,15 @@
   gap: $gap;
 }
 
+/* Kind mittig ausrichten (Grid-basierte Zentrierung) */
 @mixin center-child {
   display: grid;
   place-items: center;
 }
 
-/* Buttons (Basis) */
+/* ---------- Buttons ---------- */
+
+/* Basis-Button (Hintergrund, Hover, Fokusring) */
 @mixin base-btn(
   $height: auto,
   $font-weight: 600,
@@ -71,8 +81,9 @@
   }
 }
 
-/* ---------- Typo-Automat (Kontrollstruktur) ---------- */
-/* erzeugt h1…h6 fallende Größen ab Basis */
+/* ---------- Typografie ---------- */
+
+/* Generiert h1–h6 mit abnehmenden Größen ab einem Maximum */
 @mixin font-sizes($max: 2.5rem, $decrease: 0.25rem, $base: 1rem) {
   $current: $max;
   @for $i from 1 through 6 {
@@ -85,7 +96,9 @@
   }
 }
 
-/* ---------- Utility-Generatoren (Kontrollstrukturen) ---------- */
+/* ---------- Utility-Generatoren ---------- */
+
+/* Spacing-Skala für Utility-Klassen */
 $space: (
   xs: 0.25rem,
   sm: 0.5rem,
@@ -94,11 +107,13 @@ $space: (
   xl: 2rem,
 );
 
+/* Erzeugt gap-/margin-/padding-Utilities in allen Größen aus $space */
 @mixin generate-spacing-utilities {
   @each $name, $val in $space {
     .gap-#{$name} {
       gap: $val;
     }
+
     .m-#{$name} {
       margin: $val;
     }
@@ -114,6 +129,7 @@ $space: (
     .mr-#{$name} {
       margin-right: $val;
     }
+
     .p-#{$name} {
       padding: $val;
     }
