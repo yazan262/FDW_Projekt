@@ -2,6 +2,10 @@
 @use "./_fonts" as *;
 @use "./_layout" as *;
 
+/* ==========================================================================
+   RESET & BASE STYLES
+   ========================================================================== */
+
 @layer reset {
   *,
   *::before,
@@ -12,34 +16,7 @@
   }
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: $spacing-lg;
-}
-
-th,
-td {
-  padding: $spacing-sm;
-  border: 1px solid $color-border;
-  text-align: left;
-}
-
-th {
-  background-color: $color-background-alt;
-  font-weight: bold;
-}
-
-/* Responsive Bilddarstellung */
-img,
-picture,
-svg,
-video {
-  max-inline-size: 100%;
-  block-size: auto;
-  display: block;
-}
-
+/* Base HTML Elements */
 html {
   font-size: $font-size-base;
   scroll-behavior: smooth;
@@ -53,28 +30,94 @@ body {
   padding: 0 $spacing-md;
 }
 
+/* Responsive Media */
+img,
+picture,
+svg,
+video {
+  max-inline-size: 100%;
+  block-size: auto;
+  display: block;
+}
+
+/* ==========================================================================
+   TABLES
+   ========================================================================== */
+
 @layer components {
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: $spacing-lg;
+
+    th,
+    td {
+      border: 1px solid $color-border;
+      padding: $spacing-sm;
+      text-align: left;
+    }
+
+    th {
+      background-color: $color-background-alt;
+      font-weight: bold;
+    }
+  }
+
+  /* Responsive Verhalten für kleine Screens */
+  @media (max-width: 30em) {
+    table thead {
+      display: none; /* Kopfzeile ausblenden */
+    }
+
+    table tr {
+      display: block;
+      margin-bottom: $spacing-md;
+    }
+
+    table td {
+      display: flex;
+      justify-content: space-between;
+      border: none;
+      border-bottom: 1px solid $color-border;
+      padding: $spacing-sm;
+    }
+
+    table td::before {
+      content: attr(data-label);
+      font-weight: bold;
+      margin-right: $spacing-sm;
+    }
+
+    table tr:nth-of-type(odd) {
+      background: hsl(0 0% 95%);
+    }
+  }
+}
+
+/* ==========================================================================
+   COMPONENTS
+   ========================================================================== */
+
+@layer components {
+  /* Form Elements */
   fieldset {
     padding: $spacing-md;
   }
 
-  /* Formularelemente */
   label {
     display: block;
     margin-bottom: $spacing-xs;
   }
 
-  /* Radio und Checkbox Container */
+  /* Radio and Checkbox Groups */
   .radio-group,
   .checkbox-group {
     display: flex;
-
     align-items: center;
     gap: $spacing-sm;
     margin-bottom: $spacing-xs;
   }
 
-  /* Radio und Checkbox Labels */
   .radio-group label,
   .checkbox-group label {
     display: inline;
@@ -99,6 +142,7 @@ body {
     font-size: inherit;
   }
 
+  /* Buttons */
   button {
     padding: $spacing-sm $spacing-md;
     background-color: $color-primary;
@@ -109,11 +153,10 @@ body {
   }
 
   button:hover {
-    background-color: $color-primary;
     background-color: color-mix(in srgb, $color-primary 80%, black);
   }
 
-  /* Wiederverwendbare UI-Komponenten */
+  /* Cards */
   .card {
     background-color: $color-background;
     border: 1px solid $color-border;
@@ -149,14 +192,16 @@ body {
   }
 }
 
+/* ==========================================================================
+   NAVIGATION
+   ========================================================================== */
+
 @layer navigation {
-  /* Flexibles Navigationssystem */
   nav ul {
     display: flex;
     flex-wrap: wrap;
     gap: $spacing-md;
     padding: $spacing-md 0;
-    /* list-style: none; */
   }
 
   nav li {
@@ -170,19 +215,22 @@ body {
     background-color: $color-background-alt;
     border-radius: $border-radius;
     transition: all 0.2s ease;
-    color: $color-text; /* explizite Textfarbe für bessere Lesbarkeit */
+    color: $color-text;
   }
 
   nav a:hover {
     background-color: $color-primary;
-    color: white !important; /* weiße Schrift beim Hover für guten Kontrast */
+    color: white !important;
     text-decoration: none;
   }
 }
 
-/* Utilities */
+/* ==========================================================================
+   UTILITIES
+   ========================================================================== */
+
 @layer utilities {
-  /* Abstände zwischen Flex-Items */
+  /* Gap Utilities */
   .gap-xs {
     gap: $spacing-xs;
   }
@@ -199,7 +247,7 @@ body {
     gap: $spacing-xl;
   }
 
-  /* Margin-Utilities */
+  /* Margin Utilities */
   .m-0 {
     margin: 0;
   }
@@ -216,7 +264,6 @@ body {
     margin-right: 0;
   }
 
-  /* Margin-Varianten mit verschiedenen Größen */
   .m-sm {
     margin: $spacing-sm;
   }
@@ -249,7 +296,7 @@ body {
     margin-right: $spacing-md;
   }
 
-  /* Padding-Utilities */
+  /* Padding Utilities */
   .p-0 {
     padding: 0;
   }
@@ -266,7 +313,6 @@ body {
     padding-right: 0;
   }
 
-  /* Padding-Varianten mit verschiedenen Größen */
   .p-sm {
     padding: $spacing-sm;
   }
@@ -299,7 +345,7 @@ body {
     padding-right: $spacing-md;
   }
 
-  /* Strukturelle Pseudoklassen */
+  /* Structural Pseudo-classes */
   .first-child-mt-0 > *:first-child {
     margin-top: 0;
   }
@@ -309,22 +355,57 @@ body {
   }
 }
 
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+
 @layer responsive {
   @media (max-width: 768px) {
-    /* Anpassung der Grid-Layouts für mobile Geräte */
+    /* Typography for Mobile */
+    h1 {
+      font-size: 1rem; /* viel kleiner für mobile Geräte */
+      line-height: 1.2;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      hyphens: auto; /* automatische Silbentrennung */
+      margin-bottom: $spacing-sm;
+    }
+
+    h2 {
+      font-size: 0.875rem; /* sehr klein für mobile Geräte */
+      line-height: 1.3;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      hyphens: auto; /* automatische Silbentrennung */
+      margin-bottom: $spacing-sm;
+    }
+
+    /* Spezielle Behandlung für sehr lange Wörter */
+    h1,
+    h2 {
+      max-width: 100%;
+      overflow-wrap: anywhere; /* bricht auch sehr lange Wörter */
+      word-break: break-word; /* zusätzliche Worttrennung */
+    }
+
+    /* Grid Layouts for Mobile */
     .grid-2,
     .grid-3,
     .grid-4 {
       grid-template-columns: 1fr;
     }
 
-    /* Anpassung der Navigation für mobile Geräte */
+    /* Navigation for Mobile */
     nav ul {
       flex-direction: column;
       gap: $spacing-sm;
     }
   }
 }
+
+/* ==========================================================================
+   ACCESSIBILITY
+   ========================================================================== */
 
 .skip-link {
   position: absolute;
@@ -341,60 +422,74 @@ body {
   }
 }
 
-/* Ermöglicht systemweiten Dark Mode für Form Controls etc. */
+/* ==========================================================================
+   COLOR SCHEMES (LIGHT & DARK MODE)
+   ========================================================================== */
+
+/* Light Mode (Default) */
 :root {
   color-scheme: light dark;
 }
 
-/* --- Dark Mode (systemgesteuert) --- */
+/* Dark Mode */
 @media (prefers-color-scheme: dark) {
   :root {
     color-scheme: dark;
   }
 
-  /* Grundfarben */
+  /* Base Colors */
   body {
-    background: #0f1115; /* sehr dunkles Grau-Blau */
-    color: #e7e9ee; /* helles Grau für guten Kontrast */
+    background: #0f1115;
+    color: #e7e9ee;
   }
 
-  /* Links – nutze deinen Primary-Ton als Basis */
+  /* Links */
   a {
-    /* mischt deinen $color-primary etwas Richtung Weiß, damit es auf dunkel leuchtet */
     color: color-mix(in srgb, $color-primary 75%, white);
   }
   a:hover {
     color: color-mix(in srgb, $color-primary 85%, white);
   }
 
-  /* Navigation im Dark Mode */
+  /* Navigation */
   nav a {
-    color: #e7e9ee; /* normale Textfarbe für Navigation im Dark Mode */
-    background-color: #2a2f3a; /* dunklerer Hintergrund für Navigation */
+    color: #e7e9ee;
+    background-color: #2a2f3a;
   }
   nav a:hover {
     background-color: $color-primary;
-    color: white !important; /* weiße Schrift beim Hover für guten Kontrast */
+    color: white !important;
     text-decoration: none;
   }
 
-  /* Karten */
+  /* Cards */
   .card {
-    background-color: #151821; /* etwas heller als Body */
-    border-color: #2a2f3a; /* gedämpfte Border */
+    background-color: #151821;
+    border-color: #2a2f3a;
   }
 
-  /* Tabelle */
+  /* Tables */
   table {
     background: #151821;
     border-color: #2a2f3a;
   }
-  th,
-  td {
+  table th {
+    background-color: #1a1f2a !important; /* dunklerer Hintergrund für Header im Dark Mode */
+    border-color: #2a2f3a !important;
+    color: #e7e9ee !important; /* Textfarbe für bessere Lesbarkeit */
+  }
+  table td {
     border-color: #2a2f3a;
   }
 
-  /* Formulare */
+  /* Responsive Tables in Dark Mode */
+  @media (max-width: 30em) {
+    table tr:nth-of-type(odd) {
+      background: #1a1f2a; /* dunkleres Grau für Dark Mode */
+    }
+  }
+
+  /* Forms */
   input,
   select,
   textarea {
@@ -403,15 +498,15 @@ body {
     border-color: #2a2f3a;
   }
 
-  /* dezente Hinweise/Fehlermeldungen */
+  /* Messages */
   .hint {
     color: #b6c2d9;
   }
   .form-msg {
     color: #ffb4a9;
-  } /* Fehler in rötlich, gut sichtbar */
+  }
 
-  /* Optional: Fokus sichtbarer machen */
+  /* Focus */
   :focus-visible {
     outline: 2px solid color-mix(in srgb, $color-primary 70%, white);
     outline-offset: 2px;
