@@ -1,44 +1,67 @@
 @charset "UTF-8";
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin-bottom: 1rem;
-  line-height: 1.2;
+/* styles.scss */
+/* _colors.scss */
+/* styles.scss */
+/* _fonts.scss */
+/* _mixins.scss | eigene Mixins & Generatoren */
+/* ---------- Basics ---------- */
+/* Uppercase + Bold (ähnlich Prof) */
+/* Flex/Grid Helfer */
+/* Buttons (Basis) */
+/* ---------- Typo-Automat (Kontrollstruktur) ---------- */
+/* erzeugt h1…h6 fallende Größen ab Basis */
+/* ---------- Utility-Generatoren (Kontrollstrukturen) ---------- */
+/* Automatische Hierarchie: größtes H1 fällt bis H6 ab */
+:root {
+  font-size: 16px;
+  line-height: 1.5;
 }
 
-/* Abnehmende Schriftgrößen für visuelle Hierarchie */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ersetzt die manuellen h1…h6 Blöcke */
 h1 {
   font-size: 2.5rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 2.25rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
 }
 
 h3 {
-  font-size: 1.75rem;
+  font-size: 2rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
 }
 
 h4 {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
 }
 
 h5 {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
 }
 
 h6 {
-  font-size: 1rem;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
 }
 
 p {
   margin-bottom: 1rem;
 }
 
-/* Link-Styles */
 a {
   color: #3498db;
   text-decoration: none;
@@ -63,6 +86,8 @@ ol {
   list-style-type: decimal;
 }
 
+/* styles.scss */
+/* _layout.scss */
 @layer layout {
   /* Container für zentrierten Inhalt */
   .container {
@@ -107,6 +132,8 @@ ol {
     align-items: center;
   }
 }
+/* styles.scss */
+/* _foundation.scss */
 /* ==========================================================================
    RESET & BASE STYLES
    ========================================================================== */
@@ -627,4 +654,5 @@ video {
     outline: 2px solid color-mix(in srgb, #3498db 70%, white);
     outline-offset: 2px;
   }
-}/*# sourceMappingURL=styles.css.map */
+}
+/* _fonts.scss *//*# sourceMappingURL=styles.css.map */

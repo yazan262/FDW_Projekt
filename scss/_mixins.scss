@@ -1,0 +1,133 @@
+/* _mixins.scss | eigene Mixins & Generatoren */
+
+/* ---------- Basics ---------- */
+@mixin focus-ring($color, $width: 2px) {
+  outline: $width solid $color;
+  outline-offset: 2px;
+}
+
+@mixin sr-only {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Uppercase + Bold (ähnlich Prof) */
+@mixin uppercase-bold-text(
+  $color: currentColor,
+  $font-weight: 700,
+  $letter-spacing: 0.02em
+) {
+  color: $color;
+  text-transform: uppercase;
+  font-weight: $font-weight;
+  letter-spacing: $letter-spacing;
+}
+
+/* Flex/Grid Helfer */
+@mixin flex-box(
+  $flow: row,
+  $wrap: wrap,
+  $main: center,
+  $cross: center,
+  $gap: 1rem
+) {
+  display: flex;
+  flex-flow: $flow $wrap;
+  justify-content: $main;
+  align-items: $cross;
+  gap: $gap;
+}
+
+@mixin center-child {
+  display: grid;
+  place-items: center;
+}
+
+/* Buttons (Basis) */
+@mixin base-btn(
+  $height: auto,
+  $font-weight: 600,
+  $bg: hsl(210 90% 45%),
+  $fg: #fff,
+  $hover: hsl(210 90% 38%),
+  $outline: hsl(210 40% 30%)
+) {
+  cursor: pointer;
+  height: $height;
+  font-weight: $font-weight;
+  border: 1px solid transparent;
+  background: $bg;
+  color: $fg;
+
+  &:hover {
+    background: $hover;
+  }
+  &:focus-visible {
+    @include focus-ring($outline);
+  }
+}
+
+/* ---------- Typo-Automat (Kontrollstruktur) ---------- */
+/* erzeugt h1…h6 fallende Größen ab Basis */
+@mixin font-sizes($max: 2.5rem, $decrease: 0.25rem, $base: 1rem) {
+  $current: $max;
+  @for $i from 1 through 6 {
+    h#{$i} {
+      font-size: if($current >= $base, $current, $base);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    $current: $current - $decrease;
+  }
+}
+
+/* ---------- Utility-Generatoren (Kontrollstrukturen) ---------- */
+$space: (
+  xs: 0.25rem,
+  sm: 0.5rem,
+  md: 1rem,
+  lg: 1.5rem,
+  xl: 2rem,
+);
+
+@mixin generate-spacing-utilities {
+  @each $name, $val in $space {
+    .gap-#{$name} {
+      gap: $val;
+    }
+    .m-#{$name} {
+      margin: $val;
+    }
+    .mt-#{$name} {
+      margin-top: $val;
+    }
+    .mb-#{$name} {
+      margin-bottom: $val;
+    }
+    .ml-#{$name} {
+      margin-left: $val;
+    }
+    .mr-#{$name} {
+      margin-right: $val;
+    }
+    .p-#{$name} {
+      padding: $val;
+    }
+    .pt-#{$name} {
+      padding-top: $val;
+    }
+    .pb-#{$name} {
+      padding-bottom: $val;
+    }
+    .pl-#{$name} {
+      padding-left: $val;
+    }
+    .pr-#{$name} {
+      padding-right: $val;
+    }
+  }
+}
