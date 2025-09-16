@@ -344,7 +344,7 @@
             Hast du ähnliche Erfahrungen im Studium gemacht? Oder läuft bei dir
             alles anders? Teile deine Geschichte mit mir:
           </p>
-          <form action="#" method="post">
+          <form id="exp-form" action="#" method="post" novalidate>
             <fieldset>
               <legend>Deine Kontaktdaten</legend>
 
@@ -485,7 +485,10 @@
               <input type="reset" value="Zurücksetzen" />
             </div>
           </form>
+          <div id="form-feedback" aria-live="polite" class="visually-hidden"></div>
       </article>
     </main>
+    <script src="js/form-validation.js"></script>
+    <script src="js/scroll-animation.js"></script>
   </body>
 </html>

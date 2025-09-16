@@ -27,6 +27,8 @@ body {
   line-height: $line-height;
   color: $color-text;
   background-color: $color-background;
+  max-width: 1200px; /* maximale Breite für den Inhalt */
+  margin: 0 auto; /* zentriert den Inhalt horizontal */
   padding: 0 $spacing-md;
 }
 
@@ -163,6 +165,17 @@ video {
     border-radius: $border-radius;
     padding: $spacing-md;
     margin-bottom: $spacing-md;
+
+    /* Fade-In Animation */
+    opacity: 0;
+    transform: translateY(2rem);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  /* Sichtbar, sobald JS-Klasse hinzugefügt wird */
+  .card.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   main.container {
@@ -210,18 +223,31 @@ video {
   }
 
   nav a {
+    position: relative;
     display: block;
     padding: $spacing-sm $spacing-md;
-    background-color: $color-background-alt;
-    border-radius: $border-radius;
-    transition: all 0.2s ease;
-    color: $color-text;
+    text-decoration: none;
+    color: $color-primary;
+    transition: color 0.3s ease; /* smooth color */
+  }
+
+  nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0;
+    height: 2px;
+    background: $color-primary;
+    transition: width 0.3s ease; /* smooth underline */
   }
 
   nav a:hover {
-    background-color: $color-primary;
-    color: white !important;
-    text-decoration: none;
+    color: color-mix(in srgb, $color-primary 80%, black);
+  }
+
+  nav a:hover::after {
+    width: 100%; /* animierte Linie fährt rein */
   }
 }
 
@@ -353,6 +379,37 @@ video {
   .last-child-mb-0 > *:last-child {
     margin-bottom: 0;
   }
+
+  /* Form Feedback Utilities */
+  .visually-hidden {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .form-msg {
+    margin-block-start: 0.25rem;
+    font-size: 0.95em;
+  }
+
+  .form-msg--error {
+    color: #b00020;
+  }
+
+  .form-msg--ok {
+    color: #1b5e20;
+  }
+
+  .is-invalid {
+    border-color: #b00020;
+  }
+
+  .is-valid {
+    border-color: #1b5e20;
+  }
 }
 
 /* ==========================================================================
@@ -451,15 +508,18 @@ video {
     color: color-mix(in srgb, $color-primary 85%, white);
   }
 
-  /* Navigation */
+  /* Navigation im Dark Mode */
   nav a {
-    color: #e7e9ee;
-    background-color: #2a2f3a;
+    color: color-mix(in srgb, $color-primary 75%, white);
+  }
+  nav a::after {
+    background: color-mix(in srgb, $color-primary 75%, white);
   }
   nav a:hover {
-    background-color: $color-primary;
-    color: white !important;
-    text-decoration: none;
+    color: color-mix(in srgb, $color-primary 85%, white);
+  }
+  nav a:hover::after {
+    background: color-mix(in srgb, $color-primary 85%, white);
   }
 
   /* Cards */
@@ -504,6 +564,23 @@ video {
   }
   .form-msg {
     color: #ffb4a9;
+  }
+
+  /* Form Feedback in Dark Mode */
+  .form-msg--error {
+    color: #ff6b6b; /* helleres Rot für Dark Mode */
+  }
+
+  .form-msg--ok {
+    color: #51cf66; /* helleres Grün für Dark Mode */
+  }
+
+  .is-invalid {
+    border-color: #ff6b6b;
+  }
+
+  .is-valid {
+    border-color: #51cf66;
   }
 
   /* Focus */

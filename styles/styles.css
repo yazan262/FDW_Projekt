@@ -130,6 +130,8 @@ body {
   line-height: 1.5;
   color: #333;
   background-color: #fff;
+  max-width: 1200px; /* maximale Breite für den Inhalt */
+  margin: 0 auto; /* zentriert den Inhalt horizontal */
   padding: 0 1rem;
 }
 
@@ -248,6 +250,15 @@ video {
     border-radius: 4px;
     padding: 1rem;
     margin-bottom: 1rem;
+    /* Fade-In Animation */
+    opacity: 0;
+    transform: translateY(2rem);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  /* Sichtbar, sobald JS-Klasse hinzugefügt wird */
+  .card.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
   main.container {
     container-type: inline-size;
@@ -289,17 +300,28 @@ video {
     padding: 0;
   }
   nav a {
+    position: relative;
     display: block;
     padding: 0.5rem 1rem;
-    background-color: #f5f5f5;
-    border-radius: 4px;
-    transition: all 0.2s ease;
-    color: #333;
+    text-decoration: none;
+    color: #3498db;
+    transition: color 0.3s ease; /* smooth color */
+  }
+  nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0;
+    height: 2px;
+    background: #3498db;
+    transition: width 0.3s ease; /* smooth underline */
   }
   nav a:hover {
-    background-color: #3498db;
-    color: white !important;
-    text-decoration: none;
+    color: color-mix(in srgb, #3498db 80%, black);
+  }
+  nav a:hover::after {
+    width: 100%; /* animierte Linie fährt rein */
   }
 }
 /* ==========================================================================
@@ -421,6 +443,31 @@ video {
   .last-child-mb-0 > *:last-child {
     margin-bottom: 0;
   }
+  /* Form Feedback Utilities */
+  .visually-hidden {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+  .form-msg {
+    margin-block-start: 0.25rem;
+    font-size: 0.95em;
+  }
+  .form-msg--error {
+    color: #b00020;
+  }
+  .form-msg--ok {
+    color: #1b5e20;
+  }
+  .is-invalid {
+    border-color: #b00020;
+  }
+  .is-valid {
+    border-color: #1b5e20;
+  }
 }
 /* ==========================================================================
    RESPONSIVE DESIGN
@@ -508,15 +555,18 @@ video {
   a:hover {
     color: color-mix(in srgb, #3498db 85%, white);
   }
-  /* Navigation */
+  /* Navigation im Dark Mode */
   nav a {
-    color: #e7e9ee;
-    background-color: #2a2f3a;
+    color: color-mix(in srgb, #3498db 75%, white);
+  }
+  nav a::after {
+    background: color-mix(in srgb, #3498db 75%, white);
   }
   nav a:hover {
-    background-color: #3498db;
-    color: white !important;
-    text-decoration: none;
+    color: color-mix(in srgb, #3498db 85%, white);
+  }
+  nav a:hover::after {
+    background: color-mix(in srgb, #3498db 85%, white);
   }
   /* Cards */
   .card {
@@ -539,6 +589,7 @@ video {
   /* Responsive Tables in Dark Mode */
   /* Forms */
   /* Messages */
+  /* Form Feedback in Dark Mode */
   /* Focus */
 }
 @media (prefers-color-scheme: dark) and (max-width: 30em) {
@@ -559,6 +610,18 @@ video {
   }
   .form-msg {
     color: #ffb4a9;
+  }
+  .form-msg--error {
+    color: #ff6b6b; /* helleres Rot für Dark Mode */
+  }
+  .form-msg--ok {
+    color: #51cf66; /* helleres Grün für Dark Mode */
+  }
+  .is-invalid {
+    border-color: #ff6b6b;
+  }
+  .is-valid {
+    border-color: #51cf66;
   }
   :focus-visible {
     outline: 2px solid color-mix(in srgb, #3498db 70%, white);
