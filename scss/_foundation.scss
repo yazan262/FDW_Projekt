@@ -169,12 +169,13 @@ body {
     padding: $spacing-sm $spacing-md;
     background-color: $color-background-alt;
     border-radius: $border-radius;
-    transition: background-color 0.2s ease;
+    transition: all 0.2s ease;
+    color: $color-text; /* explizite Textfarbe für bessere Lesbarkeit */
   }
 
   nav a:hover {
     background-color: $color-primary;
-    color: white;
+    color: white !important; /* weiße Schrift beim Hover für guten Kontrast */
     text-decoration: none;
   }
 }
@@ -337,5 +338,82 @@ body {
   &:focus {
     top: 0;
     left: 0;
+  }
+}
+
+/* Ermöglicht systemweiten Dark Mode für Form Controls etc. */
+:root {
+  color-scheme: light dark;
+}
+
+/* --- Dark Mode (systemgesteuert) --- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
+
+  /* Grundfarben */
+  body {
+    background: #0f1115; /* sehr dunkles Grau-Blau */
+    color: #e7e9ee; /* helles Grau für guten Kontrast */
+  }
+
+  /* Links – nutze deinen Primary-Ton als Basis */
+  a {
+    /* mischt deinen $color-primary etwas Richtung Weiß, damit es auf dunkel leuchtet */
+    color: color-mix(in srgb, $color-primary 75%, white);
+  }
+  a:hover {
+    color: color-mix(in srgb, $color-primary 85%, white);
+  }
+
+  /* Navigation im Dark Mode */
+  nav a {
+    color: #e7e9ee; /* normale Textfarbe für Navigation im Dark Mode */
+    background-color: #2a2f3a; /* dunklerer Hintergrund für Navigation */
+  }
+  nav a:hover {
+    background-color: $color-primary;
+    color: white !important; /* weiße Schrift beim Hover für guten Kontrast */
+    text-decoration: none;
+  }
+
+  /* Karten */
+  .card {
+    background-color: #151821; /* etwas heller als Body */
+    border-color: #2a2f3a; /* gedämpfte Border */
+  }
+
+  /* Tabelle */
+  table {
+    background: #151821;
+    border-color: #2a2f3a;
+  }
+  th,
+  td {
+    border-color: #2a2f3a;
+  }
+
+  /* Formulare */
+  input,
+  select,
+  textarea {
+    background: #0f1115;
+    color: #e7e9ee;
+    border-color: #2a2f3a;
+  }
+
+  /* dezente Hinweise/Fehlermeldungen */
+  .hint {
+    color: #b6c2d9;
+  }
+  .form-msg {
+    color: #ffb4a9;
+  } /* Fehler in rötlich, gut sichtbar */
+
+  /* Optional: Fokus sichtbarer machen */
+  :focus-visible {
+    outline: 2px solid color-mix(in srgb, $color-primary 70%, white);
+    outline-offset: 2px;
   }
 }
