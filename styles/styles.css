@@ -1,0 +1,389 @@
+@charset "UTF-8";
+@use "./_colors" as *;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+/* Abnehmende Schriftgrößen für visuelle Hierarchie */
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.75rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+/* Link-Styles */
+a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Listen-Styles */
+ul,
+ol {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+ul {
+  list-style-type: disc;
+}
+
+ol {
+  list-style-type: decimal;
+}
+
+@use "./_colors" as *;
+@use "./_fonts" as *;
+@layer layout {
+  /* Container für zentrierten Inhalt */
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  /* Grid-Layout-System */
+  .grid {
+    display: grid;
+    gap: 1rem;
+  }
+  /* Vordefinierte Grid-Spalten für häufige Layouts */
+  .grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  /* Flexbox-Layout-System */
+  .flex {
+    display: flex;
+  }
+  /* Flexbox-Ausrichtungsoptionen */
+  .flex-col {
+    flex-direction: column;
+  }
+  .flex-wrap {
+    flex-wrap: wrap;
+  }
+  .justify-between {
+    justify-content: space-between;
+  }
+  .justify-center {
+    justify-content: center;
+  }
+  .items-center {
+    align-items: center;
+  }
+}
+
+@use "./_colors" as *;
+@use "./_fonts" as *;
+@use "./_layout" as *;
+@layer reset {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+}
+
+th,
+td {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+}
+
+/* Responsive Bilddarstellung */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.5;
+  color: #333;
+  background-color: #fff;
+  padding: 0 1rem;
+}
+
+@layer components {
+  fieldset {
+    padding: 1rem;
+  }
+  /* Formularelemente */
+  label {
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+  /* Radio und Checkbox Container */
+  .radio-group,
+  .checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.25rem;
+  }
+  /* Radio und Checkbox Labels */
+  .radio-group label,
+  .checkbox-group label {
+    display: inline;
+    margin-bottom: 0;
+  }
+  input[type="radio"],
+  input[type="checkbox"] {
+    width: auto;
+    margin-bottom: 0;
+  }
+  input,
+  select,
+  textarea {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: inherit;
+  }
+  button {
+    padding: 0.5rem 1rem;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #3498db;
+    background-color: color-mix(in srgb, #3498db 80%, black);
+  }
+  /* Wiederverwendbare UI-Komponenten */
+  .card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+@layer navigation {
+  /* Flexibles Navigationssystem */
+  nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem 0;
+    /* list-style: none; */
+  }
+  nav li {
+    margin: 0;
+    padding: 0;
+  }
+  nav a {
+    display: block;
+    padding: 0.5rem 1rem;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+  }
+  nav a:hover {
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+  }
+}
+
+/* Utilities */
+@layer utilities {
+  /* Abstände zwischen Flex-Items */
+  .gap-xs {
+    gap: 0.25rem;
+  }
+  .gap-sm {
+    gap: 0.5rem;
+  }
+  .gap-md {
+    gap: 1rem;
+  }
+  .gap-lg {
+    gap: 1.5rem;
+  }
+  .gap-xl {
+    gap: 2rem;
+  }
+  /* Margin-Utilities */
+  .m-0 {
+    margin: 0;
+  }
+  .mt-0 {
+    margin-top: 0;
+  }
+  .mb-0 {
+    margin-bottom: 0;
+  }
+  .ml-0 {
+    margin-left: 0;
+  }
+  .mr-0 {
+    margin-right: 0;
+  }
+  /* Margin-Varianten mit verschiedenen Größen */
+  .m-sm {
+    margin: 0.5rem;
+  }
+  .mt-sm {
+    margin-top: 0.5rem;
+  }
+  .mb-sm {
+    margin-bottom: 0.5rem;
+  }
+  .ml-sm {
+    margin-left: 0.5rem;
+  }
+  .mr-sm {
+    margin-right: 0.5rem;
+  }
+  .m-md {
+    margin: 1rem;
+  }
+  .mt-md {
+    margin-top: 1rem;
+  }
+  .mb-md {
+    margin-bottom: 1rem;
+  }
+  .ml-md {
+    margin-left: 1rem;
+  }
+  .mr-md {
+    margin-right: 1rem;
+  }
+  /* Padding-Utilities */
+  .p-0 {
+    padding: 0;
+  }
+  .pt-0 {
+    padding-top: 0;
+  }
+  .pb-0 {
+    padding-bottom: 0;
+  }
+  .pl-0 {
+    padding-left: 0;
+  }
+  .pr-0 {
+    padding-right: 0;
+  }
+  /* Padding-Varianten mit verschiedenen Größen */
+  .p-sm {
+    padding: 0.5rem;
+  }
+  .pt-sm {
+    padding-top: 0.5rem;
+  }
+  .pb-sm {
+    padding-bottom: 0.5rem;
+  }
+  .pl-sm {
+    padding-left: 0.5rem;
+  }
+  .pr-sm {
+    padding-right: 0.5rem;
+  }
+  .p-md {
+    padding: 1rem;
+  }
+  .pt-md {
+    padding-top: 1rem;
+  }
+  .pb-md {
+    padding-bottom: 1rem;
+  }
+  .pl-md {
+    padding-left: 1rem;
+  }
+  .pr-md {
+    padding-right: 1rem;
+  }
+  /* Strukturelle Pseudoklassen */
+  .first-child-mt-0 > *:first-child {
+    margin-top: 0;
+  }
+  .last-child-mb-0 > *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+@layer responsive {
+  @media (max-width: 768px) {
+    /* Anpassung der Grid-Layouts für mobile Geräte */
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+      grid-template-columns: 1fr;
+    }
+    /* Anpassung der Navigation für mobile Geräte */
+    nav ul {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+}
+/*# sourceMappingURL=styles.css.map */

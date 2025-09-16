@@ -1,0 +1,55 @@
+@use "./_colors" as *;
+@use "./_fonts" as *;
+
+$max-width: 1200px;
+$border-radius: 4px;
+
+@layer layout {
+
+  /* Container für zentrierten Inhalt */
+  .container {
+    width: 100%;
+    max-width: $max-width;
+    margin: 0 auto;
+    padding: 0 $spacing-md;
+  }
+
+  /* Grid-Layout-System */
+  .grid {
+    display: grid;
+    gap: $spacing-md;
+  }
+
+  /* Vordefinierte Grid-Spalten für häufige Layouts */
+  .grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  /* Flexbox-Layout-System */
+  .flex {
+    display: flex;
+  }
+
+  /* Flexbox-Ausrichtungsoptionen */
+  .flex-col {
+    flex-direction: column;
+  }
+  .flex-wrap {
+    flex-wrap: wrap;
+  }
+  .justify-between {
+    justify-content: space-between;
+  }
+  .justify-center {
+    justify-content: center;
+  }
+  .items-center {
+    align-items: center;
+  }
+}

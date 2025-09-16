@@ -1,0 +1,297 @@
+@use "./_colors" as *;
+@use "./_fonts" as *;
+@use "./_layout" as *;
+
+@layer reset {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: $spacing-lg;
+}
+
+th,
+td {
+  padding: $spacing-sm;
+  border: 1px solid $color-border;
+  text-align: left;
+}
+
+th {
+  background-color: $color-background-alt;
+  font-weight: bold;
+}
+
+/* Responsive Bilddarstellung */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+html {
+  font-size: $font-size-base;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $font-family;
+  line-height: $line-height;
+  color: $color-text;
+  background-color: $color-background;
+  padding: 0 $spacing-md; 
+}
+
+@layer components {
+  fieldset {
+    padding: $spacing-md;
+  }
+
+  /* Formularelemente */
+  label {
+    display: block;
+    margin-bottom: $spacing-xs;
+  }
+
+  /* Radio und Checkbox Container */
+  .radio-group,
+  .checkbox-group {
+    display: flex;
+
+    align-items: center;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-xs;
+  }
+
+  /* Radio und Checkbox Labels */
+  .radio-group label,
+  .checkbox-group label {
+    display: inline;
+    margin-bottom: 0;
+  }
+
+  input[type="radio"],
+  input[type="checkbox"] {
+    width: auto;
+    margin-bottom: 0;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    padding: $spacing-sm;
+    margin-bottom: $spacing-md;
+    border: 1px solid $color-border;
+    border-radius: $border-radius;
+    font-family: inherit;
+    font-size: inherit;
+  }
+
+  button {
+    padding: $spacing-sm $spacing-md;
+    background-color: $color-primary;
+    color: white;
+    border: none;
+    border-radius: $border-radius;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: $color-primary;
+    background-color: color-mix(in srgb, $color-primary 80%, black);
+  }
+
+  /* Wiederverwendbare UI-Komponenten */
+  .card {
+    background-color: $color-background;
+    border: 1px solid $color-border;
+    border-radius: $border-radius;
+    padding: $spacing-md;
+    margin-bottom: $spacing-md;
+  }
+}
+
+@layer navigation {
+  /* Flexibles Navigationssystem */
+  nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-md;
+    padding: $spacing-md 0;
+    /* list-style: none; */
+  }
+
+  nav li {
+    margin: 0;
+    padding: 0;
+  }
+
+  nav a {
+    display: block;
+    padding: $spacing-sm $spacing-md;
+    background-color: $color-background-alt;
+    border-radius: $border-radius;
+    transition: background-color 0.2s ease;
+  }
+
+  nav a:hover {
+    background-color: $color-primary;
+    color: white;
+    text-decoration: none;
+  }
+}
+
+/* Utilities */
+@layer utilities {
+  /* Abstände zwischen Flex-Items */
+  .gap-xs {
+    gap: $spacing-xs;
+  }
+  .gap-sm {
+    gap: $spacing-sm;
+  }
+  .gap-md {
+    gap: $spacing-md;
+  }
+  .gap-lg {
+    gap: $spacing-lg;
+  }
+  .gap-xl {
+    gap: $spacing-xl;
+  }
+
+  /* Margin-Utilities */
+  .m-0 {
+    margin: 0;
+  }
+  .mt-0 {
+    margin-top: 0;
+  }
+  .mb-0 {
+    margin-bottom: 0;
+  }
+  .ml-0 {
+    margin-left: 0;
+  }
+  .mr-0 {
+    margin-right: 0;
+  }
+
+  /* Margin-Varianten mit verschiedenen Größen */
+  .m-sm {
+    margin: $spacing-sm;
+  }
+  .mt-sm {
+    margin-top: $spacing-sm;
+  }
+  .mb-sm {
+    margin-bottom: $spacing-sm;
+  }
+  .ml-sm {
+    margin-left: $spacing-sm;
+  }
+  .mr-sm {
+    margin-right: $spacing-sm;
+  }
+
+  .m-md {
+    margin: $spacing-md;
+  }
+  .mt-md {
+    margin-top: $spacing-md;
+  }
+  .mb-md {
+    margin-bottom: $spacing-md;
+  }
+  .ml-md {
+    margin-left: $spacing-md;
+  }
+  .mr-md {
+    margin-right: $spacing-md;
+  }
+
+  /* Padding-Utilities */
+  .p-0 {
+    padding: 0;
+  }
+  .pt-0 {
+    padding-top: 0;
+  }
+  .pb-0 {
+    padding-bottom: 0;
+  }
+  .pl-0 {
+    padding-left: 0;
+  }
+  .pr-0 {
+    padding-right: 0;
+  }
+
+  /* Padding-Varianten mit verschiedenen Größen */
+  .p-sm {
+    padding: $spacing-sm;
+  }
+  .pt-sm {
+    padding-top: $spacing-sm;
+  }
+  .pb-sm {
+    padding-bottom: $spacing-sm;
+  }
+  .pl-sm {
+    padding-left: $spacing-sm;
+  }
+  .pr-sm {
+    padding-right: $spacing-sm;
+  }
+
+  .p-md {
+    padding: $spacing-md;
+  }
+  .pt-md {
+    padding-top: $spacing-md;
+  }
+  .pb-md {
+    padding-bottom: $spacing-md;
+  }
+  .pl-md {
+    padding-left: $spacing-md;
+  }
+  .pr-md {
+    padding-right: $spacing-md;
+  }
+
+  /* Strukturelle Pseudoklassen */
+  .first-child-mt-0 > *:first-child {
+    margin-top: 0;
+  }
+
+  .last-child-mb-0 > *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+@layer responsive {
+  @media (max-width: 768px) {
+    /* Anpassung der Grid-Layouts für mobile Geräte */
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+      grid-template-columns: 1fr;
+    }
+
+    /* Anpassung der Navigation für mobile Geräte */
+    nav ul {
+      flex-direction: column;
+      gap: $spacing-sm;
+    }
+  }
+}

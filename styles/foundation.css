@@ -1,0 +1,396 @@
+/* Reihenfolge optional festlegen */
+@layer reset, colors, fonts, layout, components;
+
+@layer reset {
+  *,
+  *::after,
+  *::before {
+    box-sizing: border-box;
+  }
+
+  :root {
+    scroll-behavior: smooth;
+  }
+
+  ul,
+  ol,
+  dl {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    /* logisch vertical */
+    min-block-size: 100vh;
+    margin: 0;
+  }
+
+  p,
+  li {
+    text-wrap: pretty;
+    /* logisch horizontal */
+    max-inline-size: var(--max-text-length);
+  }
+
+  img,
+  picture,
+  svg,
+  video {
+    max-inline-size: 100%;
+    height: auto;
+    display: block;
+  }
+
+  em,
+  strong,
+  code,
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  /* nesting */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  table th,
+  table td {
+    border: 1px solid var(--border-color);
+    padding: var(--spacing-small);
+  }
+
+  a,
+  button {
+    cursor: pointer;
+  }
+  
+  /* Strukturelle Pseudoklassen */
+  article:first-of-type {
+    margin-top: var(--spacing-large);
+  }
+  
+  article:last-of-type {
+    margin-bottom: var(--spacing-xl);
+  }
+  
+  p:first-of-type {
+    font-weight: 500;
+  }
+  
+  /* Für die Navigation */
+  nav li:nth-child(odd) {
+    background-color: rgba(0, 0, 0, 0.03);
+  }
+  
+  /* Für die Tabelle */
+  tr:nth-of-type(even) {
+    background-color: var(--table-alt-bg);
+  }
+}
+
+@layer colors {
+  /* Alle farbbasierten Eigenschaften */
+  :root {
+    /* Deklaration von Farben */
+    --main-color: hsl(140, 52%, 90%);
+    --secondary-color: hsl(200, 100%, 50%);
+    --accent-color: hsl(0, 100%, 50%);
+    --text-color: hsl(0, 0%, 20%);
+    --heading-color: hsl(200, 70%, 20%);
+    --link-color: hsl(200, 100%, 40%);
+    --link-hover-color: hsl(200, 100%, 30%);
+    --border-color: hsl(0, 0%, 80%);
+    --form-bg: hsl(0, 0%, 96%);
+    --table-alt-bg: hsl(0, 0%, 95%);
+    --nav-bg: hsl(200, 30%, 95%);
+    --header-bg: hsl(199, 19%, 74%);
+    --header-text: white;
+  }
+  
+  body {
+    color: var(--text-color);
+  }
+  
+  h1, h2, h3, h4 {
+    color: var(--heading-color);
+  }
+  
+  article {
+    background: var(--main-color);
+  }
+  
+  /* Links stylen */
+  a {
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color var(--transition-speed) ease;
+  }
+  
+  a:hover, a:focus {
+    color: var(--link-hover-color);
+    text-decoration: underline;
+  }
+  
+  /* Link Attribute selektieren */
+  a[href^="#"] {
+    border-bottom: 1px dashed var(--secondary-color);
+  }
+  
+  a[href^="https://"] {
+    color: var(--accent-color);
+  }
+  
+  /* Header stylen */
+  header {
+    background-color: var(--header-bg);
+    color: var(--header-text);
+  }
+  
+  /* Navigation stylen */
+  nav {
+    background-color: var(--nav-bg);
+    border-bottom: 2px solid var(--secondary-color);
+  }
+}
+
+@layer fonts {
+  /* Alles für Schriften und Typografie */
+  :root {
+    --basic-font-size: 16px;
+    --max-text-length: 60ch;
+    --spacing-small: 0.5rem;
+    --spacing-medium: 1rem;
+    --spacing-large: 2rem;
+    --spacing-xl: 4rem;
+    --border-radius: 4px;
+    --transition-speed: 0.3s;
+    
+    /* Grundlegende Schrifteinstellungen */
+    font-size: var(--basic-font-size);
+    line-height: 1.5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  /* Relativer Schriftenaufbau */
+  h1 {
+    font-size: 2.5rem;
+    margin-top: 0;
+  }
+  
+  h2 {
+    font-size: 2rem;
+    margin-top: var(--spacing-large);
+  }
+  
+  h3 {
+    font-size: 1.75rem;
+  }
+  
+  h4 {
+    font-size: 1.5rem;
+  }
+  
+  p {
+    margin-bottom: var(--spacing-medium);
+    font-size: 1rem;
+  }
+  
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+    line-height: 1.2;
+  }
+  
+  /* Spezielle Text-Styling */
+  caption {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: var(--spacing-medium);
+    caption-side: top;
+  }
+  
+  /* Weitere Text-Styling */
+  legend {
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+  
+  /* Pseudoelemente für Texte */
+  article h2::before {
+    content: "'";
+    color: var(--secondary-color);
+  }
+  article h2::after {
+    content: "'";
+    color: var(--secondary-color);
+  }
+
+}
+
+@layer layout {
+  /* Layout-bezogene Styles */
+  body {
+    display: grid;
+    grid-template-areas:
+      "header"
+      "nav"
+      "main";
+    grid-template-rows: auto auto 1fr;
+  }
+  
+  header {
+    grid-area: header;
+    padding: var(--spacing-medium) var(--spacing-large);
+    text-align: center;
+  }
+  
+  nav {
+    grid-area: nav;
+    padding: var(--spacing-small) var(--spacing-medium);
+  }
+  
+  main {
+    grid-area: main;
+    padding: var(--spacing-medium);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  article {
+    padding: var(--spacing-medium) var(--spacing-large);
+    margin-bottom: var(--spacing-large);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Navigation layout */
+  nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-small);
+  }
+  
+  nav li {
+    flex: 1 1 auto;
+  }
+  
+  /* Kombinatoren für Layout-Elemente */
+  h2 + p {
+    font-size: 1.1rem;
+  }
+  
+  img ~ p {
+    font-style: italic;
+  }
+  
+  /* Strukturelle Pseudoklassen */
+  article:nth-child(odd) {
+    background-color: var(--main-color);
+  }
+  
+  article:nth-child(even) {
+    background-color: hsl(200, 50%, 95%);
+  }
+  
+  article:has(table) {
+    max-width: 100%;
+  }
+  
+  /* Geschwister-Selektoren */
+  h2 ~ p {
+    text-indent: 1em;
+  }
+}
+
+@layer components {
+  /* Formular-Komponenten */
+  form {
+    padding: var(--spacing-medium);
+    background-color: var(--form-bg);
+    border-radius: var(--border-radius);
+  }
+  
+  fieldset {
+    margin-bottom: var(--spacing-medium);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-medium);
+  }
+  
+  label {
+    display: block;
+    margin-bottom: var(--spacing-small);
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    margin-bottom: var(--spacing-medium);
+  }
+  
+  input[type="radio"],
+  input[type="checkbox"] {
+    margin-right: var(--spacing-small);
+  }
+  
+  input[type="submit"],
+  input[type="reset"] {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color var(--transition-speed) ease;
+  }
+  
+  input[type="submit"]:hover,
+  input[type="reset"]:hover {
+    background-color: var(--link-hover-color);
+  }
+  
+  /* Leerer Input Pseudoklassen */
+  input:focus:invalid {
+    border-color: var(--accent-color);
+  }
+  
+  input:not(:placeholder-shown):valid {
+    border-color: green;
+  }
+  
+  /* Formular Pseudoklassen */
+  select:focus {
+    outline: 2px solid var(--secondary-color);
+  }
+  
+  /* CSS für :empty Pseudoklasse */
+  div:empty {
+    display: none;
+  }
+  
+  /* CSS für :is() Pseudoklasse */
+  :is(input[type="text"], input[type="email"]):focus {
+    box-shadow: 0 0 5px var(--secondary-color);
+  }
+  
+  /* CSS für :where() Pseudoklasse */
+  :where(fieldset, form) > :not(legend) {
+    margin-left: var(--spacing-small);
+  }
+}
+
+#mehrZweifel{
+  background: rgb(236, 187, 187);
+}
